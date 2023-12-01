@@ -18,15 +18,18 @@ public class Day1 {
             String line;
             while ((line = br.readLine()) != null) {
 
+                // For each character in a line, if it is a digit, add the index to an array of indexes that contain digits
                 for (int i = 0; i < (line.length()); i++) {
                     if (Character.isDigit(line.charAt(i))) {
                         indexes.add(i);
                     }
                 }
                 if (indexes.size() == 1) {
+                    // If only a single digit is present, compound it
                     total = total + Character.getNumericValue(line.charAt(indexes.get(0))) * 10
                             + Character.getNumericValue(line.charAt(indexes.get(0)));
                 } else if (indexes.size() > 1) {
+                    // Combine the first and last digit into a single number
                     total = total + (Character.getNumericValue(line.charAt(indexes.get(0))) * 10
                             + Character.getNumericValue(line.charAt(indexes.get(indexes.size() - 1))));
                 }

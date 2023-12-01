@@ -39,6 +39,7 @@ public class Day1 {
         }
     }
 
+    // Part 2 -- made to run independently (not recursively with Part 1)
     public static int part2() {
         int total = 0;
         ArrayList<Integer> indexes = new ArrayList<>();
@@ -46,16 +47,20 @@ public class Day1 {
         try (BufferedReader br = new BufferedReader(new FileReader("input.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
-                line = lineFix(line);
+                line = lineFix(line); // Replace spelled numbers with integer digits
+
+                // For each character in a line, if it is a digit, add the index to an array of indexes that contain digits
                 for (int i = 0; i < (line.length()); i++) {
                     if (Character.isDigit(line.charAt(i))) {
                         indexes.add(i);
                     }
                 }
                 if (indexes.size() == 1) {
+                    // If only a single digit is present, compound it
                     total = total + Character.getNumericValue(line.charAt(indexes.get(0))) * 10
                             + Character.getNumericValue(line.charAt(indexes.get(0)));
                 } else if (indexes.size() > 1) {
+                    // Combine the first and last digit into a single number
                     total = total + (Character.getNumericValue(line.charAt(indexes.get(0))) * 10
                             + Character.getNumericValue(line.charAt(indexes.get(indexes.size() - 1))));
                 }
@@ -69,6 +74,8 @@ public class Day1 {
     }
 
     public static String lineFix(String line) {
+        // Modifies given string to replace all written numbers with their integer counterparts
+        // NOTE: oneight = 18, twoone = 21, and so on
         String modify = line;
         if(modify.contains("one")){
             modify = modify.replace("one", "o1e");
